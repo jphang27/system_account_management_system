@@ -29,10 +29,20 @@ function change_Password(user){
 }
 
 function sign_In(user){
-    console.log("sign_In area works");
+    let temp_Signin = user;
+    console.log("Please login: ");
+    //I feel like should really be a while loop while(user[0] !== "jphang")
+    if(temp_Signin[0] === "jphang" && temp_Signin[1] === "123456789"){
+        console.log("Username: " + temp_Signin[0]);
+        console.log("Password: " + temp_Signin[1]);
+        return console.log("Welcome " + " " + temp_Signin[0] + " " + "You are now signed in.");
+    }
+    else{
+        return console.log("Wrong username or password. Please sign-in again.");
+    }
 }
 function sign_Out(user){
-    console.log("sign_Out area works");
+    console.log("Signed out. Thank you!");
 }
 
 //Test
@@ -45,8 +55,10 @@ function namespace(){
 
     let user =["jphang", "123456789", "jphang@talentpath.com"];
     // sign_Up(user);
-    change_Password(user);
-    console.log("This is your updated information: " + change_Password(user));
+    // change_Password(user);
+    // console.log("This is your updated information: " + change_Password(user));
+    console.log("You've changed your password, please login again: ");
+    sign_In(user);
 
     // let user = "phangjohn27";
     // let user = 123456789;
