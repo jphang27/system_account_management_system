@@ -1,7 +1,4 @@
-const userLists = new Map();//Create a map that holds a key and value.
-//The idea of using a map is because it's unique. A map can also be called a dictionary.
-//For every password, there is a unique username/email.
-//Key would be username while the value would be your password.
+const userLists = new Map();
 
 let Users = (function usersAccounts() {
     
@@ -11,6 +8,8 @@ let Users = (function usersAccounts() {
     let password = "";
     let passwordConfirmation = "";
     let logIn = false;
+    let oldPw = "";
+    let newPw = "";
     
     // Object that's returned from the IIFE.
     return {
@@ -23,7 +22,6 @@ let Users = (function usersAccounts() {
                     //In this case, it'll add or update the map with new email and password.
                     userLists.set(email, password);
                     console.log("Sign-Up Completed");
-                    return true;
                 }
                 else{
                     //Failed to find a match for password
@@ -35,6 +33,7 @@ let Users = (function usersAccounts() {
                 //Username is already in the Map.
                 console.log("Username taken.")
             }
+            return email, password;
         },
         signIn(email, password){
             //In the map check to see if the email already exist in the map using the has().
@@ -43,36 +42,50 @@ let Users = (function usersAccounts() {
                 console.log("In signIn, userLists, email is : " + email + " " + " password is: " + password); //Testing Purposes
                 console.log("You are signed-in");
                 //Set it to true because you are signed in.
-                // logIn = true;
+                logIn = true;
             }
             else{
                 console.log("Signed-in attempt failed.");
             }
             // console.log("login is this: " + typeof(this.logIn)); //Use to check the boolean value.
-            return this.logIn;
+            return logIn;
         },
+        signOut(){
+            //While logIn remain true
+            //set login to false which mean that if it's false then signed out
+            if(logIn === true){
+                logIn = false;
+                console.log("Logged out");
+            }
+            else{
+                console.log("This is logIn value: " + logIn);
+                console.log("Still login");
+            }
         
-        // getNextValue: function() {
-        //     current = current + 1;
-        //     return current;
-        // },
-
-        // getNextNextValue: function(){
-        //     current = current + 2;
-        //     return current;
-        // }
+        },
+        //We want to update the current password(value) in the Map without having to have a new email(key)
+        passwordChange(oldPw, newPw){
+            //As long as the value in the Map matches the oldPw being compared, you can change password
+            if(oldPw === userLists.get(email)){
+                password = newPw;
+                console.log("Changed password");
+                return password;
+            }
+            else{
+                console.log("Was not able to change password");
+                return password;
+            }
+        },
     };
-    
 }());
-
-// console.log(Sequence.getNextValue()); // 1
-// console.log(Sequence.getNextValue()); // 2
-// console.log(Sequence.getCurrentValue()); // 2
 
 let email = "jphang@talentpath.com";
 let password = "xyz";
-// let passwordConfirmation = "xyz";
 let passwordConfirmation = "xyz";
+let oldPw = "xyz";
+let newPw = "zyx";
 
 console.log(Users.signUp(email, password, passwordConfirmation));
 console.log(Users.signIn(email, password));
+// console.log(Users.signOut());
+console.log(Users.passwordChange(oldPw, newPw));
