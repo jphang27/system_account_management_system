@@ -1,68 +1,78 @@
+const userLists = new Map();//Create a map that holds a key and value.
+//The idea of using a map is because it's unique. A map can also be called a dictionary.
+//For every password, there is a unique username/email.
+//Key would be username while the value would be your password.
 
-function sign_Up(user){
+let Users = (function usersAccounts() {
+    
+    // Private variable to store current counter value.
+    //var current = 0;
+    let email = "";
+    let password = "";
+    let passwordConfirmation = "";
+    let logIn = false;
+    
+    // Object that's returned from the IIFE.
+    return {
+        //Think of these as packages
+        signUp: function(email, password, passwordConfirmation) {
+            if(userLists.has(email) === false){
+                //If email have not been taken then check if password matches the password for this username.
+                if(password === passwordConfirmation){
+                    //Set method adds or update the map.
+                    //In this case, it'll add or update the map with new email and password.
+                    userLists.set(email, password);
+                    console.log("Sign-Up Completed");
+                    return true;
+                }
+                else{
+                    //Failed to find a match for password
+                    console.log("Password does not match")
+                    return false;
+                }
+            }
+            else{
+                //Username is already in the Map.
+                console.log("Username taken.")
+            }
+        },
+        signIn(email, password){
+            //In the map check to see if the email already exist in the map using the has().
+            //if the password (value) in the map matches the value of the key (email) then you are signed in otherwise failed.
+            if(userLists.has(email) && (password === userLists.get(email))){
+                console.log("In signIn, userLists, email is : " + email + " " + " password is: " + password); //Testing Purposes
+                console.log("You are signed-in");
+                //Set it to true because you are signed in.
+                // logIn = true;
+            }
+            else{
+                console.log("Signed-in attempt failed.");
+            }
+            // console.log("login is this: " + typeof(this.logIn)); //Use to check the boolean value.
+            return this.logIn;
+        },
+        
+        // getNextValue: function() {
+        //     current = current + 1;
+        //     return current;
+        // },
 
-    let temp1 = user; //store the user's choice of name in a temp variable
-    // Check to see if the value in the variable is a string
-    // If it is, return the string else throw a message saying invalid
+        // getNextNextValue: function(){
+        //     current = current + 2;
+        //     return current;
+        // }
+    };
+    
+}());
 
-    for(let i = 0; i < user.length; i++){
-        if(isNaN(temp1[i])){
-            console.log("Your username is: " +  user[0] + " " + " password is: " + user[1] + " " + " email is: " + user[2]);
-            return temp1;
-        }
-        else{
-            console.log("Invalid username or username already taken")
-        }
-    }
-}
+// console.log(Sequence.getNextValue()); // 1
+// console.log(Sequence.getNextValue()); // 2
+// console.log(Sequence.getCurrentValue()); // 2
 
-function change_Password(user){
-    let tempPW = user;
-    // console.log("Change password: ");
-    if(isNaN(user)){
-        tempPW.splice(1,1, "987654321"); //Change password to this
-        return tempPW;
-    }
-    else{
-        return console.log("Invalid password, try again.");
-    }
-}
+let email = "jphang@talentpath.com";
+let password = "xyz";
+// let passwordConfirmation = "xyz";
+let passwordConfirmation = "xyz";
 
-function sign_In(user){
-    let temp_Signin = user;
-    console.log("Please login: ");
-    //I feel like should really be a while loop while(user[0] !== "jphang")
-    if(temp_Signin[0] === "jphang" && temp_Signin[1] === "123456789"){
-        console.log("Username: " + temp_Signin[0]);
-        console.log("Password: " + temp_Signin[1]);
-        return console.log("Welcome " + " " + temp_Signin[0] + " " + "You are now signed in.");
-    }
-    else{
-        return console.log("Wrong username or password. Please sign-in again.");
-    }
-}
-function sign_Out(user){
-    console.log("Signed out. Thank you!");
-}
-
-//Test
-// let user = "Johnny";
-// console.log(sign_Up(user));
-
-/************************************************TESTING AREA**********************************************************/
-function namespace(){
-    console.log("Welcome to Jphang's Talent Path sign-up form."); //For testing
-
-    let user =["jphang", "123456789", "jphang@talentpath.com"];
-    // sign_Up(user);
-    // change_Password(user);
-    // console.log("This is your updated information: " + change_Password(user));
-    console.log("You've changed your password, please login again: ");
-    sign_In(user);
-
-    // let user = "phangjohn27";
-    // let user = 123456789;
-    // sign_Up(someString);
-}
-
-namespace();
+console.log(Users.signUp(email, password, passwordConfirmation));
+console.log(Users.signIn(email, password));

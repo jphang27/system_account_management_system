@@ -59,7 +59,7 @@ class User{
     };
     //We want to update the current password(value) in the Map without having to have a new email(key)
     passwordChange(oldPw, newPw){
-        //As long as the value in the Map matches the oldPw being compared
+        //As long as the value in the Map matches the oldPw being compared, you can change password
         if(oldPw === userLists.get(this.email)){
             this.password = newPw;
             console.log("Changed password");
