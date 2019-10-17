@@ -6,10 +6,8 @@ let Users = (function usersAccounts() {
     //var current = 0;
     let email = "";
     let password = "";
-    let passwordConfirmation = "";
+    // let passwordConfirmation = "";
     let logIn = false;
-    let oldPw = "";
-    let newPw = "";
     
     // Object that's returned from the IIFE.
     return {
@@ -33,6 +31,8 @@ let Users = (function usersAccounts() {
                 //Username is already in the Map.
                 console.log("Username taken.")
             }
+            console.log("signUp email: " + email);
+            console.log("signUp password: " + password);
             return email, password;
         },
         signIn(email, password){
@@ -64,7 +64,7 @@ let Users = (function usersAccounts() {
         
         },
         //We want to update the current password(value) in the Map without having to have a new email(key)
-        passwordChange(oldPw, newPw){
+        passwordChange(email, oldPw, newPw){
             //As long as the value in the Map matches the oldPw being compared, you can change password
             if(oldPw === userLists.get(email)){
                 password = newPw;
@@ -88,4 +88,4 @@ let newPw = "zyx";
 console.log(Users.signUp(email, password, passwordConfirmation));
 console.log(Users.signIn(email, password));
 // console.log(Users.signOut());
-console.log(Users.passwordChange(oldPw, newPw));
+console.log(Users.passwordChange(email, oldPw, newPw));
