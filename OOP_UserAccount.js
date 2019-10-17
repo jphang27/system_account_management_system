@@ -13,7 +13,7 @@ class User{
     signUp(){
         //the has object is specific to Map.
         //Checks for a specific key, example is if the list of users have this email, then return "Username taken."
-        if(!userLists.has(this.email)){
+        if(userLists.has(this.email) === false){
             //If email have not been taken then check if password matches the password for this username.
             if(this.password === this.passwordConfirmation){
                 //Set method adds or update the map.
