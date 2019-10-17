@@ -1,9 +1,6 @@
 const userLists = new Map();
 
 let Users = (function usersAccounts() {
-    
-    // Private variable to store current counter value.
-    //var current = 0;
     let email = "";
     let password = "";
     // let passwordConfirmation = "";
@@ -87,5 +84,5 @@ let newPw = "zyx";
 
 console.log(Users.signUp(email, password, passwordConfirmation));
 console.log(Users.signIn(email, password));
-// console.log(Users.signOut());
+console.log(Users.signOut());
 console.log(Users.passwordChange(email, oldPw, newPw));
